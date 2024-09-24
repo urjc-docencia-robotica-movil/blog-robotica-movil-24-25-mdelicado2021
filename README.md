@@ -8,3 +8,7 @@ Para elegir qué estados se dan en cada iteración se decide de forma aleatoria 
 
 ## Otras ideas
 Otra forma de organizar la máquina de estados es, en vez de decidir la acción a tomar de forma semialeatoria, se puede seguir una lógica. Por ejemplo, hago espirales hasta que se choque, retrocedo y, después, giro y avanzo.
+
+Por otro lado, una herramienta que se puede utilizar, empleando el método por lógica, es el láser. Se puede utilizar para detectar perturbaciones en el llidar.
+
+Por último, se pueden utilizar marcas de tiempo para cambiar de estado de forma que unicamente nos encontramos en un estado durante el tiempo deseado.
