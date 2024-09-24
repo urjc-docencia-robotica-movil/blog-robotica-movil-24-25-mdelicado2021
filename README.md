@@ -6,6 +6,10 @@ Para que la aspiradora adopte un comportamiento adecuado he utilizado una máqui
 
 Para elegir qué estados se dan en cada iteración se decide de forma aleatoria dando ciertos valores a la probabilidad de que se actúe de distintas formas (avanzando, retrocediendo y espirales).
 
+La aspiradora cubriría esta zona en pocos minutos:
+![image](https://github.com/user-attachments/assets/98e0cade-f048-44a0-bbd3-fa411566c6e4)
+
+
 ## Otras ideas
 Otra forma de organizar la máquina de estados es, en vez de decidir la acción a tomar de forma semialeatoria, se puede seguir una lógica. Por ejemplo, hago espirales hasta que se choque, retrocedo y, después, giro y avanzo.
 
