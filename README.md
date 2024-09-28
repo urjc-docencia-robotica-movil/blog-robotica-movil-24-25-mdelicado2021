@@ -1,23 +1,25 @@
-# FORO P1 ASPIRADORA
-Se trata de programar una aspiradora básica que cubra la mayor superficie en el menor tiempo posible. En esta práctica se requería un autómata robusto y reactivo.
+# VACUUM CLEANER P1 FORUM
+The task is to program a basic vacuum cleaner that covers the largest surface area in the shortest possible time. In this exercise, a robust and reactive automaton was required.
 
-## Estructura del código
-Para que la aspiradora adopte un comportamiento adecuado he utilizado una máquina de estados en la que se transiciona de forma senorial. Es decir, cambia de estado debido a ciertos datos sensoriales que se reciben (en este caso, el bumper).
+## Code Structure
+To ensure the vacuum cleaner adopts the appropriate behavior, I used a state machine that transitions based on sensory input. In other words, it changes state due to certain sensory data being received (in this case, the bumper).
 
-Para elegir qué estados se dan en cada iteración se decide de forma aleatoria dando ciertos valores a la probabilidad de que se actúe de distintas formas (avanzando, retrocediendo y espirales).
+To decide which states occur in each iteration, it is determined randomly by assigning certain probabilities to how the vacuum will act (moving forward, moving backward, and spirals).
 
-La aspiradora cubriría esta zona en pocos minutos:
+The vacuum cleaner would cover this area in just a few minutes:
 ![image](https://github.com/user-attachments/assets/98e0cade-f048-44a0-bbd3-fa411566c6e4)
 
-Un vídeo del funcionamiento: https://youtu.be/WPY0k75JNCk
+A video of the operation: https://youtu.be/WPY0k75JNCk
 
+## Other Ideas
+Another way to organize the state machine is, instead of semi-randomly deciding the action to take, to follow a logical pattern. For example, I make spirals until it bumps into something, then reverse, turn, and move forward.
 
-## Otras ideas
-Otra forma de organizar la máquina de estados es, en vez de decidir la acción a tomar de forma semialeatoria, se puede seguir una lógica. Por ejemplo, hago espirales hasta que se choque, retrocedo y, después, giro y avanzo.
+Additionally, a tool that can be used when employing the logic method is a laser. The laser can be used to detect disturbances.
 
-Por otro lado, una herramienta que se puede utilizar, empleando el método por lógica, es el láser. Se puede utilizar para detectar perturbaciones en el láser.
+Finally, timestamps can be used to change states so that we only remain in a state for the desired amount of time.
 
-Por último, se pueden utilizar marcas de tiempo para cambiar de estado de forma que unicamente nos encontramos en un estado durante el tiempo deseado.
+These are some tools that can be used to support the implementation of reactive and robust code. However, in this case, I considered it unnecessary to use them.
 
-## Link blog anterior
-Aquí se puede comprobar el crecimiento del código poco a poco: https://mariofburjc.blogspot.com/2023/09/p1aspiradora.html
+## Previous Blog Link
+Here, you can see the code's gradual development: https://mariofburjc.blogspot.com/2023/09/p1aspiradora.html
+
