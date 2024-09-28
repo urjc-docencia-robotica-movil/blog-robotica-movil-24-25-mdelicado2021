@@ -9,7 +9,7 @@ To decide which states occur in each iteration, it is determined randomly by ass
 The vacuum cleaner would cover this area in just a few minutes:
 ![image](https://github.com/user-attachments/assets/98e0cade-f048-44a0-bbd3-fa411566c6e4)
 
-A video of the operation: https://youtu.be/WPY0k75JNCk
+A video of the operation: https://youtu.be/WPY0k75JNCk _*due to the length of the video it is recommended to use x2_
 
 ## Other Ideas
 Another way to organize the state machine is, instead of semi-randomly deciding the action to take, to follow a logical pattern. For example, I make spirals until it bumps into something, then reverse, turn, and move forward.
