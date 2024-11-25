@@ -1,21 +1,21 @@
-# **GLOBAL NAVIGATION P4**
+# **GLOBAL NAVIGATION P4**.
 
-Esta práctica requeria implementar un sistema de navegación basado en mapas de costos y gradientes para guiar a un robot hacia un objetivo.
+This practice required implementing a navigation system based on cost and gradient maps to guide a robot to a target.
 
-## **Funciones y Utilidad**
+## **Functions and Usefulness**
 
-### **Seguridad: add_margin_to_map**
-- **Descripción**: 
-  Amplía los obstáculos en el mapa al agregar un margen de seguridad alrededor de ellos, aumentando el costo de las celdas cercanas. Esto ayuda a evitar que el robot pase demasiado cerca de los obstáculos.
-- **Utilidad**: 
-  Mejora la seguridad en la navegación al garantizar una separación mínima entre el robot y los obstáculos.
+### **Safety: add_margin_to_map**
+- **Description**: 
+  Widens obstacles on the map by adding a safety margin around them, increasing the cost of nearby cells. This helps prevent the robot from passing too close to obstacles.
+- **Utility**: 
+  Improves navigational safety by ensuring a minimum separation between the robot and obstacles.
 
-### **Creación del grid: build_cost_map**
-- **Descripción**: 
-  Crea un mapa de costos a partir de un objetivo utilizando el algoritmo de propagación de costos. La propagación se limita a un área alrededor del robot y el objetivo, con un margen configurable.
-- **Utilidad**: 
-  Proporciona un mapa de costos optimizado que guía al robot desde su posición actual hacia el objetivo.
-- **Aclaraciones**:
+### **Grid creation: build_cost_map**
+- **Description**: 
+  Creates a cost map from a target using the cost propagation algorithm. Propagation is limited to an area around the robot and the target, with a configurable margin.
+- **Utility**: 
+  Provides an optimised cost map that guides the robot from its current position to the target.
+- **Clarifications**:
   ```python
     # Define the bounding box to limit the region of propagation
     min_x = min(x_target, x_robot) - margin
@@ -29,14 +29,14 @@ Esta práctica requeria implementar un sistema de navegación basado en mapas de
     min_y = max(min_y, 0)
     max_y = min(max_y, map_array.shape[0] - 1)
   ```
-  Esta parte de la función crea la región sobre la que se hará el grid.
+  This part of the function creates the region over which the grid will be made.
 
-### **Cálculo del gradiente: compute_gradient**
-- **Descripción**: 
-  Calcula el gradiente en una celda del mapa de costos usando diferencias centrales. Este gradiente indica la dirección de menor costo.
-- **Utilidad**: 
-  Determina la dirección más eficiente para que el robot avance hacia el objetivo.
-- **Aclaraciones**:
+### **Compute gradient: compute_gradient**
+- **Description**: 
+  Computes the gradient in a cost map cell using central differences. This gradient indicates the direction of least cost.
+- **Utility**: 
+  Determines the most efficient direction for the robot to move towards the target.
+- **Clarifications**:
   ```python
     grad_x = (cost_grid[y, x + 1] - cost_grid[y, x - 1]) / 2.0 if 0 < x < cost_grid.shape[1] - 1 else 0
     grad_y = (cost_grid[y + 1, x] - cost_grid[y - 1, x]) / 2.0 if 0 < y < cost_grid.shape[0] - 1 else 0
@@ -44,12 +44,12 @@ Esta práctica requeria implementar un sistema de navegación basado en mapas de
   Aquí es donde se calcula el gradiente de cada celdilla.
 
   
-### **Navegación: go_to_target**
-- **Descripción**: 
-  Utiliza el mapa de costos y el gradiente para mover al robot hacia el objetivo. Ajusta las velocidades lineal y angular del robot en función del gradiente y la posición actual del objetivo.
-- **Utilidad**: 
-  Implementa el control del movimiento del robot, asegurándose de que siga el camino óptimo hacia el objetivo.
-- **Aclaraciones**:
+### Navigation: go_to_target
+- **Description**: 
+  Uses the cost map and gradient to move the robot towards the target. Adjusts the linear and angular velocities of the robot based on the gradient and the current position of the target.
+- **Utility**: 
+  Implements motion control of the robot, ensuring that it follows the optimal path to the target.
+- **Clarifications**:
   ```python
     # Calculate direction to the selected cell
     target_x, target_y = min_cost_pos
@@ -69,17 +69,17 @@ Esta práctica requeria implementar un sistema de navegación basado en mapas de
   Esta es la forma de calcular la velocidad lineal y angular en función de la celdilla objetivo.
 
 
-## **Desafios**
-Durante esta práctica he tenido diferentes dificultades. En primer lugar el grid básico que implementé unicamente se propagaba en cuatro direcciones (arriba, abajo, derecha, izaquierda), lo que se solucionó añdiendo las direcciones restantes (diagonales):
+## **Challenges**
+During this practice I had different difficulties. First of all the basic grid I implemented only propagated in four directions (top, bottom, right, left), which was solved by adding the remaining directions (diagonals):
 ```python
 directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
 ```
-Además, el grid básico tampoco tenía en cuenta que las celdillas cercanas a los obstáculos por lo que el taxi circulaba pegado a las paredes como se puede ver en el vídeo: https://youtu.be/ful4NNGGG4Y.
-Esto se solucionó mediante la función "add_margin_to_map", que posibilita una circulación menos ajustada a los márgenes reales de las paredes del mapa: https://youtu.be/Be37JCWNttQ.
+In addition, the basic grid also did not take into account the cells near the obstacles, so the taxi was driving close to the walls, as can be seen in the video: https://youtu.be/ful4NNGGG4Y.
+This was solved by the function ‘add_margin_to_map’, which allows a circulation less adjusted to the real margins of the walls of the map: https://youtu.be/Be37JCWNttQ.
 
-Por otro lado, el grid también tenía el problema de que se extendia por todo el mapa, lo que provocaba una pérdida de eficiencia en cuanto al coste computacional ya que se tenían en cuenta partes del mapa sobre las que el taxi no pasaría para llegar al objetivo.
-Por ello se limitó la propagación del grid hasta la posición del taxi más un pequeño margen modificable.
+On the other hand, the grid also had the problem of being spread over the entire map, which caused a loss of efficiency in terms of computational cost as it took into account parts of the map over which the taxi would not pass in order to reach the target.
+Therefore, the grid propagation was limited to the position of the taxi plus a small modifiable margin.
 
-La parte de navegación está basada en un algoritmo que determina, en un rango modificable, qué celdilla es la de menor coste (la más cercanas al objetivo) obteniendo el siguiente comportamiento: https://youtu.be/vpbyIQq1eoE.
-La parte de navegación supuso también ciertos desafios. Por ejemplo, la función "go_to_target", que es la encargada de la navegación, en su primer diseño, generaba un comportamiento miedoso del taxi ya que se le daba mucho valor a las celdillas cercanas a las paredes con, además, mucho rango.
-El código final provoca un comportamiento robusto y eficiente que se puede comprobar en el siguiente vídeo: https://youtu.be/Og3FECglrX4.
+The navigation part is based on an algorithm that determines, in a modifiable range, which cell has the lowest cost (the closest to the target) obtaining the following behaviour: https://youtu.be/vpbyIQq1eoE.
+The navigation part also posed some challenges. For example, the function ‘go_to_target’, which is in charge of navigation, in its first design, generated a scary behaviour of the taxi as it gave a lot of value to the cells near the walls with, in addition, a lot of range.
+The final code results in a robust and efficient behaviour that can be seen in the following video: https://youtu.be/Og3FECglrX4.
