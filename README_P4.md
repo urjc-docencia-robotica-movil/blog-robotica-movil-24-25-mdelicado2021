@@ -4,13 +4,13 @@ This practice required implementing a navigation system based on cost and gradie
 
 ## **Functions and Usefulness**
 
-### **Safety: add_margin_to_map**
+### **Safety: `add_margin_to_map`**
 - **Description**: 
   Widens obstacles on the map by adding a safety margin around them, increasing the cost of nearby cells. This helps prevent the robot from passing too close to obstacles.
 - **Utility**: 
   Improves navigational safety by ensuring a minimum separation between the robot and obstacles.
 
-### **Grid creation: build_cost_map**
+### **Grid creation: `build_cost_map`**
 - **Description**: 
   Creates a cost map from a target using the cost propagation algorithm. Propagation is limited to an area around the robot and the target, with a configurable margin.
 - **Utility**: 
@@ -31,7 +31,7 @@ This practice required implementing a navigation system based on cost and gradie
   ```
   This part of the function creates the region over which the grid will be made.
 
-### **Compute gradient: compute_gradient**
+### **Compute gradient: `compute_gradient`**
 - **Description**: 
   Computes the gradient in a cost map cell using central differences. This gradient indicates the direction of least cost.
 - **Utility**: 
@@ -41,10 +41,10 @@ This practice required implementing a navigation system based on cost and gradie
     grad_x = (cost_grid[y, x + 1] - cost_grid[y, x - 1]) / 2.0 if 0 < x < cost_grid.shape[1] - 1 else 0
     grad_y = (cost_grid[y + 1, x] - cost_grid[y - 1, x]) / 2.0 if 0 < y < cost_grid.shape[0] - 1 else 0
   ```
-  Aquí es donde se calcula el gradiente de cada celdilla.
+Here is where the gradient of every map cell is calculated.
 
   
-### Navigation: go_to_target
+### Navigation: `go_to_target`
 - **Description**: 
   Uses the cost map and gradient to move the robot towards the target. Adjusts the linear and angular velocities of the robot based on the gradient and the current position of the target.
 - **Utility**: 
@@ -66,7 +66,7 @@ This practice required implementing a navigation system based on cost and gradie
     angular_speed = angle_diff * 2.0  # Angular correction gain
     linear_speed = max(2.5, 5.0 - abs(angle_diff))  # Adaptive linear speed
   ```
-  Esta es la forma de calcular la velocidad lineal y angular en función de la celdilla objetivo.
+This is the way to calculate linear and angular velocities as a function of the target cell.
 
 
 ## **Challenges**
