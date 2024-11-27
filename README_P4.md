@@ -4,13 +4,13 @@ This practice required implementing a navigation system based on cost and gradie
 
 ## **Functions and Usefulness**
 
-### **Safety: `add_margin_to_map`**
+### Safety: `add_margin_to_map`
 - **Description**: 
   Widens obstacles on the map by adding a safety margin around them, increasing the cost of nearby cells. This helps prevent the robot from passing too close to obstacles.
 - **Utility**: 
   Improves navigational safety by ensuring a minimum separation between the robot and obstacles.
 
-### **Grid creation: `build_cost_map`**
+### Grid creation: `build_cost_map`
 - **Description**: 
   Creates a cost map from a target using the cost propagation algorithm. Propagation is limited to an area around the robot and the target, with a configurable margin.
 - **Utility**: 
@@ -31,7 +31,7 @@ This practice required implementing a navigation system based on cost and gradie
   ```
   This part of the function creates the region over which the grid will be made.
 
-### **Compute gradient: `compute_gradient`**
+### Compute gradient: `compute_gradient`
 - **Description**: 
   Computes the gradient in a cost map cell using central differences. This gradient indicates the direction of least cost.
 - **Utility**: 
