@@ -147,3 +147,46 @@ First of all, one of the versions of the code that did not have such fine-tuned 
 
 Finally, with the final code, the behaviour is relatively close to the expected result: https://youtu.be/KXeKTTzfL-E
 
+
+## Update for proper operation
+
+The key differences between the functional implementation and the previous version highlight how the algorithm's efficiency and accuracy have evolved. Here’s a summary of the contrasts:
+
+- **Parallel Processing**:
+        The functional implementation leverages the multiprocessing module to parallelize weight calculations for the particles, enabling faster computations and better scalability with increased particle counts.
+        The earlier iteration processes weights sequentially, making it significantly slower and unsuitable for real-time applications.
+
+- **Error Metrics and Weight Calculation**:
+        The finalized implementation adopts RMSE (Root Mean Square Error) for comparing theoretical and real laser data. This ensures a precise error representation, contributing to accurate particle weighting.
+        The prior approach employs simpler, less reliable metrics, potentially leading to incorrect weight distribution and suboptimal performance.
+
+- **Particle Motion Model**:
+        The refined algorithm uses ground truth pose data for particle propagation when odometry is unavailable, while introducing noise to account for real-world uncertainties.
+        The previous design relies solely on commanded velocities, disregarding external factors like friction or motor variability, leading to accumulated inaccuracies over time.
+
+- **Optimization and Performance**:
+        The optimized version uses numpy's vectorized operations for many computational tasks, enhancing speed and resource efficiency.
+        The preceding code relies heavily on Python loops, resulting in slower execution and scalability issues.
+
+- **Ray Tracing and Laser Simulation**:
+        The functional code improves laser simulation by refining the ray-tracing logic and ensuring compatibility with the map's resolution and boundaries.
+        The earlier prototype contains inconsistencies in the ray-tracing logic, which could lead to erroneous distance calculations and map interactions.
+
+- **Robustness and Edge Case Handling**:
+        The current implementation incorporates mechanisms to handle edge cases, such as ensuring particles remain within valid map areas and normalizing weights to avoid computational errors like division by zero.
+        The initial attempt lacks such safeguards, making it prone to crashes or undefined behaviors under certain scenarios.
+
+- **Clarity and Modularity**:
+        The functional approach emphasizes modularity with clearly defined, reusable functions and detailed comments, improving maintainability and readability.
+        The earlier iteration suffers from redundant code and unclear logic in certain areas, hindering comprehension and debugging.
+
+- **Behavior evolution**:
+    - https://youtu.be/wYz2zhzX5pY
+    - https://youtu.be/kb93XIp--BI
+    - https://youtu.be/JBQUeTZiZMw
+    - https://youtu.be/l9aoBvpvxxg
+    - https://youtu.be/UdE1zaROdJk
+    - https://youtu.be/E--K2iRMYN4
+- **Final behavior**: 
+    - https://youtu.be/zTc87NWTZAA
+
